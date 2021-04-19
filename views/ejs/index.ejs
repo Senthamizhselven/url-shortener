@@ -1,0 +1,38 @@
+<html>
+
+<head>
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="d-flex flex-column justify-content-center align-items-center mt-5">
+        <h1 class="display4 mb-3">Enter the URL to be shortened</h1>
+        <% if(urlError) { %>
+            <p class="alert-danger p-2"><%= urlError %></p>
+            <% } %>
+        <% if(shortUrl) { %> 
+            <p class="alert-success p-2">URL shortened successfully</p>
+            <% } %>
+                <form action="/url" method="POST">
+                    <input type="text" placeholder="www.google.com" class="form-control" name="url">
+                    <button class="btn btn-primary mt-3" type="submit">Submit</button>
+                </form>
+                <% if(shortUrl) { %>
+                    <input class="alert-success p-2 mt-1" style="border:0" id="copyShort" value="<%=shortUrl%>">
+                    <button class="btn btn-outline-success mt-1" onClick="copyFunction()">Click to copy</button>
+                    <% } %>
+            <h1 class="display4 mt-3">Already have a shortened Url? Enter below to visit the site </h1>
+            <% if(shortError) { %> 
+                <p class="alert-danger p-2"><%= shortError %> </p>
+                <% } %>
+            <form action="/short" method="POST">
+                <input type="text" placeholder="shortend url" name="short" class="form-control">
+                <button class="btn btn-primary mt-3" type="submit">Submit</button>                
+            </form>
+    </div>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>
